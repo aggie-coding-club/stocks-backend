@@ -1,0 +1,3 @@
+[submodule "stocks-frontend"]
+	path = stocks-frontend
+	url = https://github.com/aggie-coding-club/stocks-frontend
