@@ -5,7 +5,9 @@
 git clone --recurse-submodules https://github.com/aggie-coding-club/stocks-backend.git
 # To set up the config file:
 * Add a config.env file under the /config folder
-* Specify PORT = SPECIFY_PORT_NUMBER
+Specify:
+PORT = SPECIFY_PORT_NUMBER
+MONGO_URI =
 # run this to spin up the server
 npm start
 ```
