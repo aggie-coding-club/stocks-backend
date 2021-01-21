@@ -1,9 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const logger = require("./middleware/logger");
+const connectDB = require("./config/db");
 
 // Load config
 dotenv.config({ path: "./config/config.env" });
+
+connectDB();
 
 const app = express();
 // Specify your PORT in the config.env file;
