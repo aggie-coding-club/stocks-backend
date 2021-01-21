@@ -27,10 +27,30 @@ const buildPath = path.join(__dirname, "stocks-frontend", "build");
 
 app.use(express.static(buildPath));
 
-app.get("/", (request, response) => {
-  response.sendFile(path.join(buildPath, "index.html"));
+app.get("/", (req, res) => {
+	res.sendFile(path.join(buildPath, "index.html"));
+});
+
+app.get("/stocks", (req, res) => {
+	// each request has a parameter called query that hols eveything from ? in the url
+	// query must have one of the 2 params - name, symbol
+	if (req.query && req.query != {}) {
+		let query = req.query;
+		let symbol, name;
+		if ("name" in query) {
+			name = query.name;
+			res.send({ name, symbol });
+		} else if ("symbol" in query) {
+			symbol = query.symbol;
+			res.send({ name, symbol });
+		} else {
+			res.status(400).send("please add query params for name or symbol");
+		}
+	} else {
+		res.status(400).send("please add query params for name or symbol");
+	}
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`);
+	console.log(`Example app listening at http://localhost:${PORT}`);
 });
