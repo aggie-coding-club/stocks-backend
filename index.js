@@ -26,6 +26,8 @@ const path = require("path");
 const buildPath = path.join(__dirname, "stocks-frontend", "build");
 
 app.use(express.static(buildPath));
+// api routes
+app.use("/api/stocks", require("./routes/api/stocks"));
 
 app.get("/", (request, response) => {
   response.sendFile(path.join(buildPath, "index.html"));
