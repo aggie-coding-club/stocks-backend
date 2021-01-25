@@ -3,8 +3,8 @@ const moment = require("moment");
 // Extracts intraday data from json to frontend parsable state.
 /**
  * @param {Object} data - Intraday data from AlphaVantage
- * @param {String} start - Starting (desc) point for datetime
- * @param {String} end - Ending (desc) point for datetime
+ * @param {String} start - Starting point for datetime
+ * @param {String} end - Ending point for datetime
  * @param {String} [format] - Format to the datetime strings for moment
  * @param {Integer} [diff] - Time difference in mins between each endpoints
  */
