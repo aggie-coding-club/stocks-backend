@@ -22,10 +22,13 @@ exports.extractAlphavantageDayCoordinates = (
 	while (moment(startTime).isSameOrBefore(moment(endTime))) {
 		let coordinate = {};
 		let startTimeStr = moment(startTime).format(format);
-		coordinate.Y = data[startTimeStr]["4. close"];
-		coordinate.X = startTimeStr;
+		if (typeof data[startTimeStr] === "object") {
+			coordinate.y = data[startTimeStr]["4. close"];
+			coordinate.x = startTimeStr;
+			coordinates.push(coordinate);
+		}
+
 		startTime = moment(startTime).add(diff, "minutes");
-		coordinates.push(coordinate);
 	}
 	return coordinates;
 };
