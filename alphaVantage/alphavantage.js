@@ -82,15 +82,16 @@ module.exports = class alphaVantage {
 			});
 
 		// acquiring meta data for the stock
-		let title = await this.getStockInfo(symbol);
-		title = title["name"];
+		const stockInfo = await this.getStockInfo(symbol);
+		const title = stockInfo["name"];
 		const currentValue = await this.getStockQuote(symbol);
 
-		let data = {};
-		data[symbol] = {
-			data: timeCoordinates,
-			title,
-			currentValue,
+		const data = {
+			[symbol]: {
+				data: timeCoordinates,
+				title,
+				currentValue,
+			},
 		};
 
 		return data;

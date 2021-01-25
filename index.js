@@ -39,18 +39,11 @@ app.get("/", (req, res) => {
 app.get("/stocks", (req, res) => {
 	// each request has a parameter called query that holds eveything from ? in the url
 	// query must have one param - symbol
-	if (req.query && req.query != {}) {
-		let query = req.query;
-		let symbol;
-		// TODO(shreyshah33): Add MongoDB cache check
-		if ("symbol" in query) {
-			symbol = query.symbol;
-			stocksApi.getStockData(symbol).then((results) => {
-				res.send(results);
-			});
-		} else {
-			res.status(400).send("please add query param for symbol");
-		}
+	if (typeof req.query.symbol === "string") {
+		let symbol = req.query.symbol;
+		stocksApi.getStockData(symbol).then((results) => {
+			res.send(results);
+		});
 	} else {
 		res.status(400).send("please add query param for symbol");
 	}
