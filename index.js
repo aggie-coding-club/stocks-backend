@@ -30,7 +30,7 @@ app.get("/stocks", (req, res) => {
 	// query must have one param - symbol
 	if (typeof req.query.symbol === "string") {
 		let symbol = req.query.symbol;
-		stocksApi.getStockData(symbol).then((results) => {
+		stocksApi.getStockInfo(symbol).then((results) => {
 			res.send(results);
 		});
 	} else {
