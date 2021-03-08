@@ -1,13 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const logger = require("./middleware/logger");
-const connectDB = require("./config/db");
 const alphavantage = require("./alphaVantage/alphavantage");
 
-// Load config
+// load config
 dotenv.config({ path: "./config/config.env" });
-
-connectDB();
 
 const app = express();
 // Specify your PORT in the config.env file;
@@ -21,19 +18,11 @@ const stocksApi = new alphavantage(KEY);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//init middleware
+// init middleware
 app.use(logger);
 
-const path = require("path");
-// FIXME(nhwn): this assumes the build directory is already populated (i.e.
-// `npm run-script build` has already been run in stocks-frontend); we should
-// probably check to see if the files actually exist or not
-const buildPath = path.join(__dirname, "stocks-frontend", "build");
-
-app.use(express.static(buildPath));
-
 app.get("/", (req, res) => {
-	res.sendFile(path.join(buildPath, "index.html"));
+	res.send("howdy");
 });
 
 app.get("/stocks", (req, res) => {
@@ -48,8 +37,6 @@ app.get("/stocks", (req, res) => {
 		res.status(400).send("please add query param for symbol");
 	}
 });
-
-// TODO(shreyshah33): Add /cron endpoints
 
 app.listen(PORT, () => {
 	console.log(`Example app listening at http://localhost:${PORT}`);
